@@ -21,7 +21,6 @@ public class TicTacToe{
         this.currentPlayer = player1;
     }
 
-
     //GameLoop
     public void startGame(){
         while (true) {
