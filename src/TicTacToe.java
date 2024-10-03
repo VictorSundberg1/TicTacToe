@@ -21,6 +21,22 @@ public class TicTacToe{
         this.currentPlayer = player1;
     }
 
+    public void setGameBoard(char[][] gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+
+
+    public void resetGameBoard(){
+         char[][] gameBoard = {
+                {' ', '|', ' ', '|', ' '},
+                {'-', '+', '-', '+', '-'},
+                {' ', '|', ' ', '|', ' '},
+                {'-', '+', '-', '+', '-'},
+                {' ', '|', ' ', '|', ' '}};
+         player1Positions.clear();
+         player2Positions.clear();
+         setGameBoard(gameBoard);
+    }
     //GameLoop
     public void startGame(){
         while (true) {
@@ -37,14 +53,15 @@ public class TicTacToe{
                         playerPosition = sc.nextInt();
                     }
 
-                makeMove(gameBoard, playerPosition);
+                    makeMove(gameBoard, playerPosition);
 
-                String result = checkWinner();
-                if (!result.isEmpty()) {
-                    System.out.println(result);
-                    break;
-                }
-            } catch(InputMismatchException e) {
+                    String result = checkWinner();
+                    if (!result.isEmpty()) {
+                        printGameBoard(gameBoard);
+                        System.out.println(result);
+                        break;
+                    }
+                } catch(InputMismatchException e) {
                     System.out.println("Invalid input. Please enter a number between 1 and 9");
                     sc.next();
                     continue;
@@ -66,6 +83,7 @@ public class TicTacToe{
 
                     String result = checkWinner();
                     if (!result.isEmpty()) {
+                        printGameBoard(gameBoard);
                         System.out.println(result);
                         break;
                     }
