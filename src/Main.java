@@ -19,6 +19,8 @@ public class Main {
 
         boolean running = true;
         while(running){
+            System.out.println(player1.getName() + " has " + player1.getWins() + " Wins!");
+            System.out.println(player2.getName() + " has " + player2.getWins() + " Wins!");
             System.out.println("Enter '1' to play again!");
             System.out.println("Enter '2' to exit");
             String input = sc.nextLine();

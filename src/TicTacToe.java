@@ -39,6 +39,7 @@ public class TicTacToe{
     }
     //GameLoop
     public void startGame(){
+        currentPlayer = player1;
         while (true) {
             if (currentPlayer == player1) {
                 printGameBoard(gameBoard);
@@ -122,8 +123,10 @@ public class TicTacToe{
 
         for (List<Integer> l : winningConditions) {
             if (player1Positions.containsAll(l)) {
+                player1.setWins(player1.getWins() + 1);
                 return player1.getName() + " Won!";
             } else if (player2Positions.containsAll(l)) {
+                player2.setWins(player2.getWins() + 1);
                 return player2.getName() + " Won!";
             }
         }
