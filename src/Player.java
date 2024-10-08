@@ -1,6 +1,6 @@
 public class Player {
-    private String name;
-    private char symbol;
+    private final String name;
+    private final char symbol;
     private int wins;
 
     public Player(String name, char symbol) {

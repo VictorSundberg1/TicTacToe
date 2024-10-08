@@ -27,15 +27,15 @@ public class TicTacToe{
 
 
     public void resetGameBoard(){
-         char[][] gameBoard = {
+        char[][] gameBoard = {
                 {' ', '|', ' ', '|', ' '},
                 {'-', '+', '-', '+', '-'},
                 {' ', '|', ' ', '|', ' '},
                 {'-', '+', '-', '+', '-'},
                 {' ', '|', ' ', '|', ' '}};
-         player1Positions.clear();
-         player2Positions.clear();
-         setGameBoard(gameBoard);
+        player1Positions.clear();
+        player2Positions.clear();
+        setGameBoard(gameBoard);
     }
     //GameLoop
     public void startGame(){
@@ -46,6 +46,7 @@ public class TicTacToe{
                 Scanner sc = new Scanner(System.in);
                 int playerPosition;
 
+                //Try Catch used to avoid any character that's not an int for the playerposition input
                 try {
                     System.out.println(player1.getName() + " Choose a square (1-9) ");
                     playerPosition = sc.nextInt();
@@ -70,11 +71,12 @@ public class TicTacToe{
             }
             else if (currentPlayer == player2) {
                 Scanner sc = new Scanner(System.in);
+                int player2Position;
+
                 try {
                     printGameBoard(gameBoard);
                     System.out.println(player2.getName() + " Choose a square (1-9) ");
-
-                    int player2Position = sc.nextInt();
+                    player2Position = sc.nextInt();
 
                     while (player2Positions.contains(player2Position) || player1Positions.contains(player2Position)) {
                         System.out.println("Square already occupied, please choose a new square ");
@@ -102,6 +104,7 @@ public class TicTacToe{
     //Checking for winning conditions after every turn
     public String checkWinner() {
 
+        //All possible win conditions listed
         List<Integer> topRow = Arrays.asList(1, 2, 3);
         List<Integer> midRow = Arrays.asList(4, 5, 6);
         List<Integer> botRow = Arrays.asList(7, 8, 9);
@@ -112,6 +115,7 @@ public class TicTacToe{
         List<Integer> cross2 = Arrays.asList(7, 5, 3);
 
         List<List<Integer>> winningConditions = new ArrayList<>();
+        //Adding win conditions to a list
         winningConditions.add(topRow);
         winningConditions.add(midRow);
         winningConditions.add(botRow);
