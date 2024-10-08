@@ -7,6 +7,7 @@ public class Menu {
         this.sc = new Scanner(System.in);
     }
 
+    //
     public boolean showMenu(Player player1, Player player2){
         System.out.println(player1.getName() + " has " + player1.getWins() + " Wins!");
         System.out.println(player2.getName() + " has " + player2.getWins() + " Wins!");

@@ -25,7 +25,7 @@ public class TicTacToe{
         this.gameBoard = gameBoard;
     }
 
-
+    //resetting the gameboard and all player positions
     public void resetGameBoard(){
         char[][] gameBoard = {
                 {' ', '|', ' ', '|', ' '},
@@ -37,6 +37,7 @@ public class TicTacToe{
         player2Positions.clear();
         setGameBoard(gameBoard);
     }
+
     //GameLoop
     public void startGame(){
         currentPlayer = player1;
@@ -50,6 +51,7 @@ public class TicTacToe{
                 try {
                     System.out.println(player1.getName() + " Choose a square (1-9) ");
                     playerPosition = sc.nextInt();
+                    //Checking if the square is already taken, then try again
                     while (player1Positions.contains(playerPosition) || player2Positions.contains(playerPosition)) {
                         System.out.println("Square already occupied, please choose a new square ");
                         playerPosition = sc.nextInt();
@@ -78,10 +80,12 @@ public class TicTacToe{
                     System.out.println(player2.getName() + " Choose a square (1-9) ");
                     player2Position = sc.nextInt();
 
+                    //Checking if the square is already taken, then try again
                     while (player2Positions.contains(player2Position) || player1Positions.contains(player2Position)) {
                         System.out.println("Square already occupied, please choose a new square ");
                         player2Position = sc.nextInt();
                     }
+
                     makeMove(gameBoard, player2Position);
 
                     String result = checkWinner();
@@ -97,6 +101,7 @@ public class TicTacToe{
                 }
 
             }
+            //Switching currentPlayer after each turn to the other player
             currentPlayer = (currentPlayer == player1) ? player2 : player1;
         }
     }
@@ -115,6 +120,7 @@ public class TicTacToe{
         List<Integer> cross2 = Arrays.asList(7, 5, 3);
 
         List<List<Integer>> winningConditions = new ArrayList<>();
+
         //Adding win conditions to a list
         winningConditions.add(topRow);
         winningConditions.add(midRow);
@@ -125,6 +131,7 @@ public class TicTacToe{
         winningConditions.add(cross1);
         winningConditions.add(cross2);
 
+        //checking the playerpositions lists for possible match with win conditions
         for (List<Integer> l : winningConditions) {
             if (player1Positions.containsAll(l)) {
                 player1.setWins(player1.getWins() + 1);
@@ -135,6 +142,7 @@ public class TicTacToe{
             }
         }
 
+        //checking if all positions are taken equals a draw
         if (player1Positions.size() + player2Positions.size() == 9) {
             return " It was a draw!";
         }
@@ -142,11 +150,12 @@ public class TicTacToe{
         return "";
     }
 
-
+    //Method for placing a piece depending on current player
     public void makeMove(char[][] gameBoard, int position) {
 
         char symbol = ' ';
 
+        //Checking who is the currentplayer and then adding the according symbol to the position of the input
         if (currentPlayer.equals(player1)){
             symbol = player1.getSymbol();
             player1Positions.add(position);
@@ -155,6 +164,7 @@ public class TicTacToe{
             player2Positions.add(position);
         }
 
+        // All positions in the array where you can place a piece
         switch (position){
             case 1:
                 gameBoard[0][0] = symbol;
