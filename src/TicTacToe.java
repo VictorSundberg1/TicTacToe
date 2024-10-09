@@ -40,70 +40,44 @@ public class TicTacToe{
 
     //GameLoop
     public void startGame(){
-        currentPlayer = player1;
         while (true) {
-            if (currentPlayer == player1) {
+            playerTurn(currentPlayer);
+
+            String result = checkWinner();
+            if (!result.isEmpty()) {
                 printGameBoard(gameBoard);
-                Scanner sc = new Scanner(System.in);
-                int playerPosition;
-
-                //Try Catch used to avoid any character that's not an int for the playerposition input
-                try {
-                    System.out.println(player1.getName() + " Choose a square (1-9) ");
-                    playerPosition = sc.nextInt();
-                    //Checking if the square is already taken, then try again
-                    while (player1Positions.contains(playerPosition) || player2Positions.contains(playerPosition)) {
-                        System.out.println("Square already occupied, please choose a new square ");
-                        playerPosition = sc.nextInt();
-                    }
-
-                    makeMove(gameBoard, playerPosition);
-
-                    String result = checkWinner();
-                    if (!result.isEmpty()) {
-                        printGameBoard(gameBoard);
-                        System.out.println(result);
-                        break;
-                    }
-                } catch(InputMismatchException e) {
-                    System.out.println("Invalid input. Please enter a number between 1 and 9");
-                    sc.next();
-                    continue;
-                }
-            } else if (currentPlayer == player2) {
-                Scanner sc = new Scanner(System.in);
-                int player2Position;
-
-                try {
-                    printGameBoard(gameBoard);
-                    System.out.println(player2.getName() + " Choose a square (1-9) ");
-                    player2Position = sc.nextInt();
-
-                    //Checking if the square is already taken, then try again
-                    while (player2Positions.contains(player2Position) || player1Positions.contains(player2Position)) {
-                        System.out.println("Square already occupied, please choose a new square ");
-                        player2Position = sc.nextInt();
-                    }
-
-                    makeMove(gameBoard, player2Position);
-
-                    String result = checkWinner();
-                    if (!result.isEmpty()) {
-                        printGameBoard(gameBoard);
-                        System.out.println(result);
-                        break;
-                    }
-                }catch (InputMismatchException e){
-                    System.out.println("Invalid input. Please enter a number between 1 and 9");
-                    sc.next();
-                    continue;
-                }
-
+                System.out.println(result);
+                break;
             }
             //Switching currentPlayer after each turn to the other player
             currentPlayer = (currentPlayer == player1) ? player2 : player1;
         }
     }
+
+    private void playerTurn(Player player){
+        Scanner sc = new Scanner(System.in);
+        int playerPosition;
+        while (true) {
+            printGameBoard(gameBoard);
+            System.out.println(player.getName() + " Choose a square (1-9) ");
+            //Try Catch used to avoid any character that's not an int for the playerposition input
+            try {
+                playerPosition = sc.nextInt();
+                //Checking if the square is already taken, then try again
+                if (player1Positions.contains(playerPosition) || player2Positions.contains(playerPosition)) {
+                    System.out.println("Square already occupied, please choose a new square ");
+                    continue;
+                }
+                makeMove(gameBoard, playerPosition);
+                break;
+            }
+            catch(InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number between 1 and 9");
+                sc.next();
+            }
+        }
+    }
+
 
     //Checking for winning conditions after every turn
     public String checkWinner() {
@@ -152,14 +126,12 @@ public class TicTacToe{
     //Method for placing a piece depending on current player
     public void makeMove(char[][] gameBoard, int position) {
 
-        char symbol = ' ';
+        char symbol = currentPlayer.getSymbol();
 
         //Checking who is the currentplayer and then adding the according symbol to the position of the input
         if (currentPlayer.equals(player1)){
-            symbol = player1.getSymbol();
             player1Positions.add(position);
-        } else if (currentPlayer.equals(player2)) {
-            symbol = player2.getSymbol();
+        } else {
             player2Positions.add(position);
         }
 
