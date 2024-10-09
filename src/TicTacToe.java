@@ -64,6 +64,11 @@ public class TicTacToe{
             //Try Catch used to avoid any character that's not an int for the playerposition input
             try {
                 playerPosition = sc.nextInt();
+                //Checking that the input is not a number that's higher than 9 or loser than 1
+                if (playerPosition < 1 || playerPosition > 9){
+                    System.out.println("Invalid input! Please enter a new square (1-9) ");
+                    continue;
+                }
                 //Checking if the square is already taken, then try again
                 if (player1Positions.contains(playerPosition) || player2Positions.contains(playerPosition)) {
                     System.out.println("Square already occupied, please choose a new square ");
@@ -73,7 +78,7 @@ public class TicTacToe{
                 break;
             }
             catch(InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a number between 1 and 9");
+                System.out.println("Invalid input. Please enter a new square (1-9) ");
                 sc.next();
             }
         }
@@ -135,7 +140,7 @@ public class TicTacToe{
             player2Positions.add(position);
         }
 
-        // All positions in the array where you can place a piece
+        // All positions in the array where you can place a symbol
         switch (position){
             case 1:
                 gameBoard[0][0] = symbol;
