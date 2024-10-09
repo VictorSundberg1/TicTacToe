@@ -11,8 +11,8 @@ public class TicTacToe{
             {' ', '|', ' ', '|', ' '},
             {'-', '+', '-', '+', '-'},
             {' ', '|', ' ', '|', ' '}};
-    private Player player1;
-    private Player player2;
+    private final Player player1;
+    private final Player player2;
     private Player currentPlayer;
 
     public TicTacToe(Player player1, Player player2) {
@@ -70,8 +70,7 @@ public class TicTacToe{
                     sc.next();
                     continue;
                 }
-            }
-            else if (currentPlayer == player2) {
+            } else if (currentPlayer == player2) {
                 Scanner sc = new Scanner(System.in);
                 int player2Position;
 
