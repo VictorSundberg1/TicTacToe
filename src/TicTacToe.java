@@ -40,6 +40,7 @@ public class TicTacToe{
 
     //GameLoop
     public void startGame(){
+        currentPlayer = player1;
         while (true) {
             playerTurn(currentPlayer);
 
@@ -77,7 +78,6 @@ public class TicTacToe{
             }
         }
     }
-
 
     //Checking for winning conditions after every turn
     public String checkWinner() {
@@ -169,7 +169,6 @@ public class TicTacToe{
         }
     }
 
-
     public void printGameBoard(char[][] gameBoard){
         for (char[] row: gameBoard){
             for (char c : row){
@@ -178,6 +177,4 @@ public class TicTacToe{
             System.out.println();
         }
     }
-
-
 }
