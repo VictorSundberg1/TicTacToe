@@ -42,7 +42,15 @@ public class TicTacToe{
     public void startGame(){
         currentPlayer = player1;
         while (true) {
-            playerTurn(currentPlayer);
+            if (currentPlayer instanceof AiPlayer){
+                ArrayList<Integer> allOccupiedPositions = new ArrayList<>(player1Positions);
+                allOccupiedPositions.addAll(player2Positions);
+                int position = ((AiPlayer) currentPlayer).getNextMove(allOccupiedPositions);
+                makeMove(gameBoard, position);
+                System.out.println(currentPlayer.getName() + " Choose square: " + position);
+            }else {
+                playerTurn(currentPlayer);
+            }
 
             String result = checkWinner();
             if (!result.isEmpty()) {

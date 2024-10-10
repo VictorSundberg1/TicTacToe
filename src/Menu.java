@@ -25,5 +25,16 @@ public class Menu {
                 return showMenu(player1, player2);
         }
     }
+    public Player chooseOpponent(){
+        System.out.println("Do you want to play with 2 players (1) or against an AI (2)?");
+        String choice = sc.nextLine();
+
+        if (choice.equals("1")){
+            System.out.println("Enter name of player 2 (O)");
+            return new Player(sc.nextLine(), 'O');
+        }else {
+            return new AiPlayer("AI", 'O');
+        }
+    }
 }
 
