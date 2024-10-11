@@ -45,6 +45,7 @@ public class TicTacToe{
             if (currentPlayer instanceof AiPlayer){
                 ArrayList<Integer> allOccupiedPositions = new ArrayList<>(player1Positions);
                 allOccupiedPositions.addAll(player2Positions);
+
                 int position = ((AiPlayer) currentPlayer).getNextMove(allOccupiedPositions);
                 makeMove(gameBoard, position);
                 System.out.println(currentPlayer.getName() + " Choose square: " + position);

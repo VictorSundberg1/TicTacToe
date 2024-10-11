@@ -26,14 +26,19 @@ public class Menu {
         }
     }
     public Player chooseOpponent(){
-        System.out.println("Do you want to play with 2 players (1) or against an AI (2)?");
-        String choice = sc.nextLine();
+        String choice;
+        while(true) {
+            System.out.println("Do you want to play with 2 players (1) or against an AI (2)?");
+            choice = sc.nextLine();
 
-        if (choice.equals("1")){
-            System.out.println("Enter name of player 2 (O)");
-            return new Player(sc.nextLine(), 'O');
-        }else {
-            return new AiPlayer("AI", 'O');
+            if (choice.equals("1")) {
+                System.out.println("Enter name of player 2 (O)");
+                return new Player(sc.nextLine(), 'O');
+            } else if (choice.equals("2")){
+                return new AiPlayer("AI", 'O');
+            }else {
+                System.out.println("Invalid choice, please chose (1) för 2 players, or (2) for AI");
+            }
         }
     }
 }
